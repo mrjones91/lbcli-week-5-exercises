@@ -1,7 +1,7 @@
 # Create a CLTV script with a timestamp of 1495584032 and public key below:
 # publicKey=02e3af28965693b9ce1228f9d468149b831d6a0540b25e8a9900f71372c11fb277
 publicKey=02e3af28965693b9ce1228f9d468149b831d6a0540b25e8a9900f71372c11fb277
-pubKeyHash=1e51fcdc14be9a148bb0aaec9197eb47c83776fb
+pubKeyHash=$(echo $publicKey | xxd -r -p | openssl dgst -sha256 -binary | openssl dgst -ripemd160 | cut -d ' ' -f2)
 time=1495584032
 
 
