@@ -31,14 +31,14 @@ hex=$(printf '%08x\n' $integer | sed 's/^\(00\)*//');
 hexfirst=$(echo $hex | cut -c1)
 [[ 0x$hexfirst -gt 0x7 ]] && hex="00"$hex
 
-lehex=$(echo $hex | tac -rs .. | echo "$(tr -d '\n')");
+lehex=$(echo $hex | tac -rs .. | tr -d '\n');
 
 if [ "$negative" -eq "1" ];
 then
    lehex=$(printf '%x\n' $((0x$lehex | 0x80)))
 fi
 
-size=$(echo -n $lehex | wc -c | awk '{print $time/2}');
+size=$(echo -n $lehex | wc -c | awk '{print $1/2}'); # should remain $1 to get the piped value
 hexcodeprefix=$(printf '%02x\n' $size);
 
 # relHash=0x$(. ../tools/int2le.sh $time | cut -d ' ' -f2)
